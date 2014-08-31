@@ -1,0 +1,11 @@
+<li class="photo">
+  <div class="body">
+    <%= photo.name %>
+  <%= link_to '(Reply)', new_photo_photo_path(link, photo) %>
+  </div>
+  <% unless photo.photos.empty? %>
+    <ul class="photo_list">
+      <%= render :partial => 'photos/photo', :collection => photo.photos %>
+    </ul>
+  <% end %>
+</li>

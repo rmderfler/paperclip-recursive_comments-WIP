@@ -1,0 +1,18 @@
+<p><%= @link.title %>(<%= @link.url %>)</p>
+
+<p>
+  <%= form_for [@commentable, Comment.new] do |f| %>
+    <p>
+      <%= f.text_area :content %>
+    </p>
+    <p><%= f.submit "add comment" %></p>
+  <% end %>
+</p>
+
+
+<p>
+  <b>Comments:</b>
+  <ul>
+    <%= render :partial => 'comments/comment', :collection => @commentable.comments %>
+  </ul>
+</p>

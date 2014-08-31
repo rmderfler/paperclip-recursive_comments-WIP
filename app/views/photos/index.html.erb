@@ -1,0 +1,10 @@
+<h1>Photos</h1>
+
+<table>
+  <tbody>
+    <% @photos.each do |photo| %>
+      <% link = Link.find(photo.photoable_id) %>
+        <tr><td>Photo <%= photo.id %>:<%= image_tag photo.photo %></td></tr>
+    <% end %>
+  </tbody>
+</table>

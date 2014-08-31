@@ -1,0 +1,23 @@
+<%= form_for [@link, @photo], :url => link_photos_path, :html => { :multipart => true } do |f| %>
+  <% if @photo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+
+      <ul>
+      <% @photo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class ="form-group">
+    <p>Add a photo with this button:
+    <%= f.file_field :photo %>
+  </p>
+
+  <div class="actions">
+    <%= f.submit(:class => "btn btn-primary btn-xs") %>
+  </div>
+<% end %>

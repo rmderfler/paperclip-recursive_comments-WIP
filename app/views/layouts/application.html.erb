@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+  <nav class="navbar navbar-inverse fixed navbar-custom" role="navigation">
+    <div class="container">
+      <ul class="nav navbar-nav title">
+          <li class="active"><a href="/">Links</a></li>
+          <% if current_user %>
+              <li><%= link_to "Log out", logout_path %></li>
+              <li><%= link_to "Add a Link", new_link_path %></li>
+              <li><%= link_to "Add an avatar/edit user", edit_user_path(current_user) %></li>
+              
+              <li><a>Logged in as <%= current_user.email %></a></li>
+              <li><%= image_tag current_user.photo.url(:thumb) %>
+          <% else %>
+            <li><%= link_to "Sign Up", signup_path %></li>
+            <li><%= link_to "Log In", login_path %></li>
+          <% end %>
+      </ul>
+    </div>
+  </nav>
+<body>
+  <div class="container">
+    <%= flash[:notice] %>
+    <%= yield %><br/>
+    <%= debug(params) %>
+  </div>
+</body>
+</html>

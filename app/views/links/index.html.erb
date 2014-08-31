@@ -1,0 +1,40 @@
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Link.all.sort_by_points.each do |link| %>
+      <tr class="vote">
+        <td><a href="<%= link.url %>" target="_blank" %><%= link.title %></a></td>
+        <% if current_user %>
+          <% if Vote.user_not_voted(current_user,link) %>
+            <td><%= form_for(@vote) do |f| %>
+              <%= f.hidden_field :user_id, :value => current_user.id %>
+              <%= f.hidden_field :link_id, :value => link.id %>
+              <%= f.submit "vote^" %>
+            <% end %></td>
+          <% end %>
+        <td><%= link_to "Edit", edit_link_path(link), :class => "btn btn-warning btn-xs" %></td>
+        <td><%= link_to "Delete", link_path(link),
+                         :data => {:confirm => "You sure?",
+                                   :method => "delete"},
+                         :class => "btn btn-danger btn-xs" %></td>
+        <% if current_user %>
+          <td><%= link_to "Comment", new_link_comment_path(link), :class => "btn btn-primary btn-xs" %></td>
+          <td><%= link_to "*Add Photo", new_link_photo_path(link) %></td>
+        <% end %>
+        <% if link.votes %>
+          <tr><td>Votes: <%= link.votes.count%> </td></tr>
+        <% end %>
+        <tr><td>Created at: <%= link.created_at.strftime("%b %e, %l:%M %p")%> </td></tr>
+        <% if link %>
+          <tr><td>Photos: <%=  %> </td></tr>
+        <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

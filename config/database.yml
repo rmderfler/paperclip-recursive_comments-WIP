@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: friday_development
+
+test:
+  adapter: postgresql
+  database: friday_test
